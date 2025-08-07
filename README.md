@@ -16,7 +16,7 @@
 import { Try } from "@minimal-effort/safe-try"
 
 // Synchronous operations
-const { data, error } = Try.catch(JSON.parse('{"name": "Budi"}'))
+const { data, error } = Try.catch(() => JSON.parse('{"name": "Budi"}'))
 if (error) {
     console.error("Parse failed:", error)
 
@@ -34,7 +34,11 @@ if (error) {
     // Handle error
 }
 
-console.log("Response:", data)
+const { data, error } = await Try.catch(() => fetch('/api/users'))
+if (error) {
+    console.error("API call failed:", error)
+    // Handle error
+}
 ```
 
 ## Advanced Configuration

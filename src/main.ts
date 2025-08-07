@@ -122,15 +122,18 @@ class AsyncOperation<T, E = Error> implements IAsyncOperation<T, E> {
      */
     private async run(): Promise<Result<T, E>> {
         try {
-            let operationPromise =
-                typeof this.operation === 'function'
-                    ? this.operation()
-                    : this.operation
+            let operationPromise: Promise<T>
+
+            if (typeof this.operation === 'function') {
+                operationPromise = this.operation()
+            } else {
+                operationPromise = this.operation
+            }
 
             // Apply timeout if configured using Promise.race pattern
             if (this.config.timeoutMs) {
                 const timeoutPromise = new Promise<never>((_, reject) => {
-                    setTimeout(() => {
+                    const currentTimeout = setTimeout(() => {
                         const error =
                             this.config.timeoutError ||
                             new Error(
@@ -138,6 +141,9 @@ class AsyncOperation<T, E = Error> implements IAsyncOperation<T, E> {
                             )
                         reject(error)
                     }, this.config.timeoutMs)
+
+                    // Clean up timeout if operation complete first
+                    operationPromise.finally(() => clearTimeout(currentTimeout))
                 })
 
                 // Race the operation against the timeout
@@ -149,8 +155,8 @@ class AsyncOperation<T, E = Error> implements IAsyncOperation<T, E> {
 
             const result = await operationPromise
             return { data: result, error: null }
-        } catch (error: unknown) {
-            return { data: null, error: error as E }
+        } catch (e) {
+            return { data: null, error: e as E }
         }
     }
 
@@ -257,17 +263,29 @@ export class Try {
      * @template E - The type of error (defaults to Error)
      */
     static catch<T, E = Error>(fn: Promise<T>): IAsyncOperation<T, E>
-    static catch<T, E = Error>(fn: T): Result<T, E>
+    static catch<T, E = Error>(fn: () => Promise<T>): IAsyncOperation<T, E>
+    static catch<T, E = Error>(fn: () => T): Result<T, E>
     static catch<T, E = Error>(
-        fn: Promise<T> | T,
+        fn: Promise<T> | (() => Promise<T>) | (() => T),
     ): IAsyncOperation<T, E> | Result<T, E> {
         try {
             if (fn && typeof fn === 'object' && 'then' in fn) {
-                return new AsyncOperation<T, E>(fn)
+                return new AsyncOperation<T, E>(fn as Promise<T>)
             }
 
-            // Sync case: return immediate result
-            return { data: fn as T, error: null }
+            if (typeof fn === 'function') {
+                const func = fn()
+
+                // Check if result is a Promise
+                if (func && typeof func === 'object' && 'then' in func) {
+                    return new AsyncOperation<T, E>(func as Promise<T>)
+                }
+
+                return { data: func as T, error: null }
+            }
+
+            // Should not reach here
+            throw new Error('Invalid input: expected Promise or function')
         } catch (e) {
             // Handle any synchronous errors during wrapping
             return { data: null, error: e as E }
