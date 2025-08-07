@@ -1,8 +1,13 @@
 {
     "name": "safe-try",
     "version": "0.1.0",
-    "type": "module",
-    "license": "MIT",
+    "devDependencies": {
+        "@types/bun": "^1.2.19"
+    },
+    "exports": {
+        "./package.json": "./package.json",
+        ".": "./src/mod.ts"
+    },
     "description": "Safe-try is a Typescript type-safe error handling library for both sync and async operations",
     "keywords": [
         "error-handling",
@@ -19,15 +24,10 @@
         "result",
         "either"
     ],
-    "exports": {
-        "./package.json": "./package.json",
-        ".": "./src/mod.ts"
-    },
+    "license": "MIT",
     "scripts": {
         "check": "biome check --write --unsafe",
         "dev": "bun src/main.ts"
     },
-    "devDependencies": {
-        "@types/bun": "^1.2.19"
-    }
+    "type": "module"
 }

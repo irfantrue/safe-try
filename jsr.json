@@ -1,6 +1,6 @@
 {
-    "name": "@safecode/safe-try",
-    "version": "0.1.0",
+    "name": "@lazy/safe-try",
+    "version": "1.0.0",
     "keywords": [
         "error-handling",
         "async",

@@ -65,6 +65,7 @@ export interface IAsyncOperation<T, E = Error>
      *
      * @param ms - Timeout in milliseconds
      * @param error - Optional custom timeout error
+     * @return IAsyncOperation
      */
     withTimeout(ms: number, error?: E): IAsyncOperation<T, E>
 
@@ -76,6 +77,7 @@ export interface IAsyncOperation<T, E = Error>
      * Use in combination with withBackoff() for more sophisticated retry strategies.
      *
      * @param maxAttempts - Maximum number of retry attempts
+     * @return IAsyncOperation
      */
     withRetry(maxAttempts: number): IAsyncOperation<T, E>
 
@@ -89,6 +91,7 @@ export interface IAsyncOperation<T, E = Error>
      * @param exponential - Use exponential backoff
      * @param maxDelayMs - Maximum delay cap in milliseconds (default: 30000)
      * @param jitter - Add random jitter to prevent thundering herd
+     * @return IAsyncOperation
      */
     withBackoff(options: BackoffConfig): IAsyncOperation<T, E>
 }
