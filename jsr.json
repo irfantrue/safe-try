@@ -1,0 +1,27 @@
+{
+    "name": "@safecode/safe-try",
+    "version": "0.1.0",
+    "keywords": [
+        "error-handling",
+        "async",
+        "sync",
+        "try-catch",
+        "retry",
+        "timeout",
+        "backoff",
+        "resilience",
+        "type-safe",
+        "typescript",
+        "promise",
+        "result",
+        "either"
+    ],
+    "exports": {
+        "./package.json": "./package.json",
+        ".": "./src/mod.ts"
+    },
+    "publish": {
+        "include": ["LICENSE", "README.md", "src", "package.json"],
+        "exclude": ["**/**/*.test.ts", "dist"]
+    }
+}
