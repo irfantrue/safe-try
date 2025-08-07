@@ -1,5 +1,5 @@
 {
-    "name": "@lazy/safe-try",
+    "name": "@minimal-effort/safe-try",
     "version": "1.0.0",
     "keywords": [
         "error-handling",

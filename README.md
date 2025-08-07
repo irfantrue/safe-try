@@ -13,7 +13,7 @@
 ## Basic Usage
 
 ```typescript
-import { Try } from "@lazy/safe-try"
+import { Try } from "@minimal-effort/safe-try"
 
 // Synchronous operations
 const { data, error } = Try.catch(JSON.parse('{"name": "Budi"}'))
