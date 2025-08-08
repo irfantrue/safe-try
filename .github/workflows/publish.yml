@@ -7,6 +7,7 @@ on:
 
 jobs:
   publish:
+    name: 'Publish: JavaScript Registry'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -14,3 +15,29 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: npx jsr publish
+      
+  publish-npm:
+    name: 'Publish: NPM Registry'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+
+      - name: 'Setup Bun'
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+          registry-url: "https://registry.npmjs.org"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: 'Build'
+        run: bun run build
+
+      - name: 'Publish to NPM'
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_SAFE_TRY }}
