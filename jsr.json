@@ -18,7 +18,7 @@
     ],
     "exports": {
         "./package.json": "./package.json",
-        ".": "./src/mod.ts"
+        ".": "./src/main.ts"
     },
     "publish": {
         "include": ["LICENSE", "README.md", "src", "package.json"],
