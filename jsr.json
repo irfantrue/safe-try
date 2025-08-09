@@ -1,6 +1,6 @@
 {
     "name": "@minimal-effort/safe-try",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "keywords": [
         "error-handling",
         "async",

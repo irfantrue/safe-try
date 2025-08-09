@@ -6,6 +6,9 @@ bun.lock
 bun.lockb
 node_modules
 tsconfig.json
+bunfig.toml
+jsr.json
+biome.json
 
 src
 .DS_Store
