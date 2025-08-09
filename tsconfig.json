@@ -7,7 +7,7 @@
         "lib": ["ESNext"],
         "module": "ES2022",
         // "moduleDetection": "bundler",
-        "baseUrl": "./src",
+        "baseUrl": ".",
         "types": ["bun-types"],
 
         // Bundler mode
@@ -33,5 +33,5 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true
     },
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules", "dist"]
 }

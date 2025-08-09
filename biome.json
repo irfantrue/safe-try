@@ -13,6 +13,9 @@
             }
         }
     },
+    "files": {
+        "includes": ["src/**"]
+    },
     "javascript": {
         "formatter": {
             "bracketSpacing": true,

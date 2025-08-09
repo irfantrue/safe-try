@@ -13,6 +13,7 @@ await Bun.build({
     },
     target: 'bun',
     sourcemap: 'linked',
+    root: './src',
 })
 
 process.exit()

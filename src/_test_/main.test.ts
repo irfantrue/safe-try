@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'bun:test'
 import { readFile } from 'node:fs/promises'
-import { Try } from 'main'
+import { Try } from 'src/main'
 
 describe('Try.catch', () => {
     test('should handle successful async readFile', async () => {
