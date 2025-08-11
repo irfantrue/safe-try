@@ -1,6 +1,6 @@
 {
     "name": "@minimal-effort/safe-try",
-    "version": "1.1.6",
+    "version": "1.2.0",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/irfantrue/safe-try.git"
@@ -27,7 +27,6 @@
         "retry",
         "timeout",
         "backoff",
-        "resilience",
         "type-safe",
         "typescript",
         "promise",

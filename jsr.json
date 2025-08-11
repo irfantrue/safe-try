@@ -1,6 +1,6 @@
 {
     "name": "@minimal-effort/safe-try",
-    "version": "1.1.6",
+    "version": "1.2.0",
     "keywords": [
         "error-handling",
         "async",
@@ -9,7 +9,6 @@
         "retry",
         "timeout",
         "backoff",
-        "resilience",
         "type-safe",
         "typescript",
         "promise",
